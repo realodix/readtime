@@ -1,0 +1,14 @@
+{
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "timeout": 25,
+    "logs": {
+        "text": ".logs/infection/infection.log.diff",
+        "summary": ".logs/infection/summary.log",
+        "json": ".logs/infection/infection-log.json",
+        "perMutator": ".logs/infection/per-mutator.md"
+    }
+}
