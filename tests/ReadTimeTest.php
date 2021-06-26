@@ -70,6 +70,30 @@ class ReadTimeTest extends TestCase
     }
 
     /** @test */
+    public function duration()
+    {
+        $wordSpeed = 60;
+
+        $article = str_repeat('word ', ($wordSpeed / 2) - 1);
+        $this->assertSame(
+            'less than a minute',
+            (new ReadTime($article, $wordSpeed))->toArray()['duration']
+        );
+
+        $article = str_repeat('word ', ($wordSpeed / 2));
+        $this->assertSame(
+            '1 min read',
+            (new ReadTime($article, $wordSpeed))->toArray()['duration']
+        );
+
+        $article = str_repeat('word ', ($wordSpeed * 1.5));
+        $this->assertSame(
+            '2 min read',
+            (new ReadTime($article, $wordSpeed))->toArray()['duration']
+        );
+    }
+
+    /** @test */
     public function imageReadTime()
     {
         $content = str_repeat('<img src="image.jpg">', 5);

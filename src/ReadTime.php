@@ -105,7 +105,7 @@ class ReadTime
         if ($readTime < 0.5) {
             return $this->getTranslation('less_than');
         }
-        if ($readTime >= 0.5 && $readTime < 1.5) {
+        if ($readTime < 1.5) {
             return $this->getTranslation('one_min');
         }
 
