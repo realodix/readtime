@@ -139,7 +139,7 @@ class ReadTime
      */
     private function wordsCount()
     {
-        return (int) str_word_count($this->content);
+        return str_word_count($this->content);
     }
 
     /**
