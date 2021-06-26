@@ -2,7 +2,7 @@
 
 ![PHPVersion](https://img.shields.io/badge/PHP-^7.4|^8-777BB4.svg?style=flat-square)
 ![Build Status](https://github.com/realodix/readtime/actions/workflows/ci.yml/badge.svg)
-[![GitHub license](https://img.shields.io/github/license/realodix/readtime.svg?style=flat-square)](../LICENSE)
+[![GitHub license](https://img.shields.io/github/license/realodix/readtime.svg?style=flat-square)](/LICENSE)
 
 📚 Medium's like reading time estimation, based on [Medium's read time formula](https://help.medium.com/hc/en-us/articles/214991667-Read-time).
 
