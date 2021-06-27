@@ -177,7 +177,7 @@ class ReadTime
             if ($i > 9) {
                 $second += 3;
             } else {
-                $second += (12 - ($i - 1));
+                $second += ($this->imageTime - ($i - 1));
             }
         }
 
