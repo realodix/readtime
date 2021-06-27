@@ -169,20 +169,19 @@ class ReadTime
      */
     private function imageReadTime()
     {
-        $imageTime = $this->imageTime;
+        $second = 0;
         $totalImages = $this->imagesCount();
 
-        $f10Images = 10;
-
-        if ($totalImages > $f10Images) {
-            $p1 = ($f10Images / 2) * (2 * $imageTime + (1 - $f10Images));
-            $p2 = ($totalImages - $f10Images) * 3;
-            $seconds = $p1 + $p2;
-        } else {
-            $seconds = ($totalImages / 2) * (2 * $imageTime + (1 - $totalImages));
+        // For the first image add 12 seconds, second image add 11, ..., for image 10+ add 3 seconds.
+        for ($i = 1; $i <= $totalImages; $i++) {
+            if ($i > 9) {
+                $second += 3;
+            } else {
+                $second += (12 - ($i - 1));
+            }
         }
 
-        return $seconds / 60;
+        return $second / 60;
     }
 
     /**
