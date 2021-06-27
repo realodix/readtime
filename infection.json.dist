@@ -1,14 +1,31 @@
 {
+    "timeout": 25,
     "source": {
         "directories": [
             "src"
         ]
     },
-    "timeout": 25,
+    "mutators": {
+        "@default": true,
+        "Increment": {
+            "ignore": [
+                "Realodix\\ReadTime\\ReadTime"
+            ]
+        },
+        "IncrementInteger": {
+            "ignore": [
+                "Realodix\\ReadTime\\ReadTime::__construct"
+            ]
+        },
+        "DecrementInteger": {
+            "ignore": [
+                "Realodix\\ReadTime\\ReadTime::__construct"
+            ]
+        }
+    },
     "logs": {
         "text": ".logs/infection/infection.log.diff",
         "summary": ".logs/infection/summary.log",
-        "json": ".logs/infection/infection-log.json",
         "perMutator": ".logs/infection/per-mutator.md"
     }
 }
