@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true"
-         verbose="true"
->
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true"
-                   processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
+         verbose="true">
     <testsuites>
-        <testsuite name="Realodix Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="default">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <php>
-        <ini name="memory_limit" value="2048M" />
-    </php>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
 </phpunit>
