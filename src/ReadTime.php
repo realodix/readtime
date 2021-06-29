@@ -115,9 +115,9 @@ class ReadTime
     /**
      * Actual duration of the input string (in minutes)
      *
-     * @return mixed
+     * @return float
      */
-    private function actualDuration()
+    private function actualDuration(): float
     {
         return $this->wordReadTime() + $this->wordReadTimeCJK() + $this->imageReadTime();
     }
@@ -137,7 +137,7 @@ class ReadTime
      *
      * @return int
      */
-    private function wordsCount()
+    private function wordsCount(): int
     {
         return str_word_count($this->content);
     }
