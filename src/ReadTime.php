@@ -201,7 +201,7 @@ class ReadTime
      *
      * @return void
      */
-    private function defaultTranslations()
+    private function defaultTranslations(): void
     {
         $this->setTranslation([]);
     }
