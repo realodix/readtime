@@ -36,11 +36,11 @@ class ReadTimeTest extends TestCase
         $wordSpeed = 1;
         $content = str_repeat('a ', $wordSpeed);
         $actual = (new ReadTime($content, $wordSpeed))->toArray();
-        $this->assertSame($wordSpeed, $actual['wordTime']);
+        $this->assertSame($wordSpeed, $actual['word_time']);
 
         $content = str_repeat('陳る김', $wordSpeed);
         $actual = (new ReadTime($content, $wordSpeed, 12, 3))->toArray();
-        $this->assertSame(1, $actual['wordTimeCJK']);
+        $this->assertSame(1, $actual['word_time_cjk']);
     }
 
     /** @test */
@@ -52,7 +52,7 @@ class ReadTimeTest extends TestCase
 
         $this->assertSame(
             $wordSpeed * 4,
-            (new ReadTime($array))->toArray()['totalWords']
+            (new ReadTime($array))->toArray()['total_words']
         );
     }
 
@@ -65,7 +65,7 @@ class ReadTimeTest extends TestCase
 
         $this->assertSame(
             $wordSpeed * 4,
-            (new ReadTime($array))->toArray()['totalWords']
+            (new ReadTime($array))->toArray()['total_words']
         );
     }
 
@@ -99,17 +99,17 @@ class ReadTimeTest extends TestCase
         $content = str_repeat('<img src="image.jpg">', 5);
         $actual = (new ReadTime($content))->toArray();
         // 12+11+10+9+8
-        $this->assertSame(50.0, $actual['imageTime'] * 60);
+        $this->assertSame(50.0, $actual['image_time'] * 60);
 
         $content = str_repeat('<img src="image.jpg">', 10);
         $actual = (new ReadTime($content))->toArray();
         // 12+11+10+9+8+7+6+5+4+3
-        $this->assertSame(75.0, $actual['imageTime'] * 60);
+        $this->assertSame(75.0, $actual['image_time'] * 60);
 
         $content = str_repeat('<img src="image.jpg">', 12);
         $actual = (new ReadTime($content))->toArray();
         // 75 + (3+3)
-        $this->assertSame(81.0, $actual['imageTime'] * 60);
+        $this->assertSame(81.0, $actual['image_time'] * 60);
     }
 
     /** @test */
@@ -123,7 +123,7 @@ class ReadTimeTest extends TestCase
             <img>
         ';
 
-        $this->assertSame(2, (new ReadTime($content))->toArray()['totalImages']);
+        $this->assertSame(2, (new ReadTime($content))->toArray()['total_images']);
     }
 
     /** @test */
@@ -160,14 +160,14 @@ class ReadTimeTest extends TestCase
         $actual = (new ReadTime($content, $wordSpeed, $imageTime, $cjkSpeed))->toArray();
 
         $expected = [
-            'duration'       => '3 min read',
-            'actualDuration' => $actualDuration, // 2.4073333333333333
-            'totalWords'     => $totalWords,
-            'totalWordsCJK'  => mb_strlen($cjkCharacters),
-            'totalImages'    => $t_img,
-            'wordTime'       => 2,
-            'wordTimeCJK'    => 0.024,
-            'imageTime'      => 0.38333333333333336,
+            'duration'        => '3 min read',
+            'actual_duration' => $actualDuration, // 2.4073333333333333
+            'total_words'     => $totalWords,
+            'total_words_cjk' => mb_strlen($cjkCharacters),
+            'total_images'    => $t_img,
+            'word_time'       => 2,
+            'word_time_cjk'   => 0.024,
+            'image_time'      => 0.38333333333333336,
         ];
 
         $this->assertSame($expected, $actual);

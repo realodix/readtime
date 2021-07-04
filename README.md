@@ -92,27 +92,27 @@ Get the contents and settings of the class as a JSON string.
 
 ```php
 [
-    'duration'       => '6 min read',
-    'actualDuration' => 5.55,
-    'totalWords'     => 1325,
-    'totalWordsCJK'  => 0, 
-    'totalImages'    => 3, 
-    'wordTime'       => 5.660, 
-    'wordTimeCJK'    => 0, 
-    'imageTime'      => 0.55, 
+    'duration'        => '6 min read',
+    'actual_duration' => 5.55,
+    'total_words'     => 1325,
+    'total_words_cjk' => 0, 
+    'total_images'    => 3, 
+    'word_time'       => 5.660, 
+    'word_time_cjk'   => 0, 
+    'image_time'      => 0.55, 
 ];
 ```
 
 | Variable | Description |
 | :------- | :-----------|
-| `duration`       | Humanized `actualDuration` for the input |
-| `actualDuration` | Actual duration of the input (in minutes) |
-| `totalWords`     | Number of words in the input |
-| `totalWordsCJK`  | Chinese / Japanese / Korean language characters count |
-| `totalImages`    | Number of images in input |
-| `wordTime`       | Read time of the words in the input (in minutes) |
-| `wordTimeCJK`    | Read time of the Chinese / Japanese / Korean in the input (in minutes) |
-| `imageTime`      | Read time of the images in the input (in minutes) |
+| `duration`        | Humanized `actualDuration` for the input |
+| `actual_duration` | Actual duration of the input (in minutes) |
+| `total_words`     | Number of words in the input |
+| `total_words_cjk` | Chinese / Japanese / Korean language characters count |
+| `total_images`    | Number of images in input |
+| `word_time`       | Read time of the words in the input (in minutes) |
+| `word_time_cjk`   | Read time of the Chinese / Japanese / Korean in the input (in minutes) |
+| `image_time`      | Read time of the images in the input (in minutes) |
 
 
 ## Contributing

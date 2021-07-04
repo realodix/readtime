@@ -49,14 +49,14 @@ class ReadTime
     public function toArray(): array
     {
         return [
-            'duration'       => $this->duration(),
-            'actualDuration' => $this->actualDuration(),
-            'totalWords'     => $this->wordsCount(),
-            'totalWordsCJK'  => $this->wordsCountCJK(),
-            'totalImages'    => $this->imagesCount(),
-            'wordTime'       => $this->wordReadTime(),
-            'wordTimeCJK'    => $this->wordReadTimeCJK(),
-            'imageTime'      => $this->imageReadTime(),
+            'duration'        => $this->duration(),
+            'actual_duration' => $this->actualDuration(),
+            'total_words'     => $this->wordsCount(),
+            'total_words_cjk' => $this->wordsCountCJK(),
+            'total_images'    => $this->imagesCount(),
+            'word_time'       => $this->wordReadTime(),
+            'word_time_cjk'   => $this->wordReadTimeCJK(),
+            'image_time'      => $this->imageReadTime(),
         ];
     }
 
