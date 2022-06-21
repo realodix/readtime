@@ -1,10 +1,21 @@
 <?php
 
-use Realodix\CsConfig\Factory;
-use Realodix\CsConfig\RuleSet;
+use Realodix\CsConfig\Config;
+use Realodix\CsConfig\Finder;
+use Realodix\CsConfig\Rules\Realodix;
 
-$overrideRules = [
-    // ..
+$addOrOverrideRules = [
+    // Realodix
+    'binary_operator_spaces' => [
+        'operators' => [
+            '=>' => 'align_single_space',
+            '='  => 'single_space', ],
+    ],
+    'phpdoc_annotation_without_dot' => false,
 ];
 
-return Factory::fromRuleSet(new RuleSet\RealodixPlus, $overrideRules);
+$finder = Finder::base(__DIR__)
+    ->append(['.php-cs-fixer.dist.php']);
+
+return Config::create(new Realodix($addOrOverrideRules))
+    ->setFinder($finder);
