@@ -11,7 +11,6 @@ $addOrOverrideRules = [
             '=>' => 'align_single_space',
             '='  => 'single_space', ],
     ],
-    'phpdoc_annotation_without_dot' => false,
 ];
 
 $finder = Finder::base(__DIR__)
