@@ -43,8 +43,6 @@ class ReadTime
 
     /**
      * Return an array of the class data
-     *
-     * @return array
      */
     public function toArray(): array
     {
@@ -62,8 +60,6 @@ class ReadTime
 
     /**
      * Return a json string of the class data
-     *
-     * @return string
      */
     public function toJson(): string
     {
@@ -74,8 +70,6 @@ class ReadTime
      * Parse the given content so it can be output as a read time
      *
      * @param mixed $content String or array of content
-     *
-     * @return array
      */
     private function parseContent($content): array
     {
@@ -95,8 +89,6 @@ class ReadTime
 
     /**
      * Humanize Duration for the input string
-     *
-     * @return string
      */
     private function duration(): string
     {
@@ -114,8 +106,6 @@ class ReadTime
 
     /**
      * Actual duration of the input string (in minutes)
-     *
-     * @return float
      */
     private function actualDuration(): float
     {
@@ -134,8 +124,6 @@ class ReadTime
 
     /**
      * Number of words in the input string
-     *
-     * @return int
      */
     private function wordsCount(): int
     {
@@ -186,8 +174,6 @@ class ReadTime
 
     /**
      * Number of images in the input string
-     *
-     * @return int
      */
     private function imagesCount(): int
     {
@@ -198,8 +184,6 @@ class ReadTime
 
     /**
      * Set the default translation when the class is instantiated
-     *
-     * @return void
      */
     private function defaultTranslations(): void
     {
@@ -238,10 +222,6 @@ class ReadTime
 
     /**
      * Strip html tags from content
-     *
-     * @param string $content
-     *
-     * @return string
      */
     private function cleanContent(string $content): string
     {
