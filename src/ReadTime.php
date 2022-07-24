@@ -2,8 +2,6 @@
 
 namespace Realodix\ReadTime;
 
-use Aimeos\Map as Arr;
-
 class ReadTime
 {
     /**
@@ -13,10 +11,10 @@ class ReadTime
      *                       characters in Characters per Minute
      */
     public function __construct(
-        private string|array $content,
-        private int $wordSpeed = 265,
-        private int $imageTime = 12,
-        private int $cjkSpeed = 500
+        string|array $content,
+        int $wordSpeed = 265,
+        int $imageTime = 12,
+        int $cjkSpeed = 500
     ) {
         $this->content = $this->parseContent($content)['content'];
         $this->dirtyContent = $this->parseContent($content)['dirtyContent'];
@@ -69,7 +67,7 @@ class ReadTime
         }
 
         if (is_array($content)) {
-            $content = Arr::from($content)->flat()->join();
+            $content = collect($content)->flatten();
         }
 
         return [
