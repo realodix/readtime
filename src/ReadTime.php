@@ -6,27 +6,18 @@ use Aimeos\Map as Arr;
 
 class ReadTime
 {
-    private string $content;
-
-    private int $wordsPerMin;
-
-    private int $imageTime;
-
-    private int $charactersPerMin;
-
-    private array $translations = [];
-
-    private string $dirtyContent;
-
     /**
-     * @param string|array $content
-     * @param int          $wordSpeed Speed of reading the text in Words per Minute
-     * @param int          $imageTime Speed of reading the image in seconds
-     * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
-     *                                characters in Characters per Minute
+     * @param int $wordSpeed Speed of reading the text in Words per Minute
+     * @param int $imageTime Speed of reading the image in seconds
+     * @param int $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
+     *                       characters in Characters per Minute
      */
-    public function __construct($content, int $wordSpeed = 265, int $imageTime = 12, int $cjkSpeed = 500)
-    {
+    public function __construct(
+        private string|array $content,
+        private int $wordSpeed = 265,
+        private int $imageTime = 12,
+        private int $cjkSpeed = 500
+    ) {
         $this->content = $this->parseContent($content)['content'];
         $this->dirtyContent = $this->parseContent($content)['dirtyContent'];
         $this->wordsPerMin = $wordSpeed;

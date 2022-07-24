@@ -183,10 +183,4 @@ class ReadTimeTest extends TestCase
 
         $this->assertSame($customTranslation, $actual);
     }
-
-    public function testException()
-    {
-        $this->expectException(\Exception::class);
-        (new ReadTime(1))->get();
-    }
 }
