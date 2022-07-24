@@ -1,6 +1,6 @@
 # Read time
 
-![PHPVersion](https://img.shields.io/badge/PHP-^7.4|^8-777BB4.svg?style=flat-square)
+![PHPVersion](https://img.shields.io/badge/PHP-^8-777BB4.svg?style=flat-square)
 ![Build Status](https://github.com/realodix/readtime/actions/workflows/ci.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/realodix/readtime?style=flat-square)](https://github.com/realodix/readtime/blob/main/LICENSE)
 
@@ -95,11 +95,11 @@ Get the contents and settings of the class as a JSON string.
     'duration'        => '6 min read',
     'actual_duration' => 5.55,
     'total_words'     => 1325,
-    'total_words_cjk' => 0, 
-    'total_images'    => 3, 
-    'word_time'       => 5.660, 
-    'word_time_cjk'   => 0, 
-    'image_time'      => 0.55, 
+    'total_words_cjk' => 0,
+    'total_images'    => 3,
+    'word_time'       => 5.660,
+    'word_time_cjk'   => 0,
+    'image_time'      => 0.55,
 ];
 ```
 
