@@ -15,7 +15,6 @@
         "aimeos/map": "^3.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "realodix/cs-config": "dev-main"
     },
