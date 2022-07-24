@@ -4,17 +4,22 @@ namespace Realodix\ReadTime;
 
 class ReadTime
 {
+    private int $charactersPerMin;
+
+    private array $translations = [];
+
     /**
-     * @param int $wordSpeed Speed of reading the text in Words per Minute
-     * @param int $imageTime Speed of reading the image in seconds
-     * @param int $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
-     *                       characters in Characters per Minute
+     * @param string|array $content   The content to analyze
+     * @param int          $wordSpeed Speed of reading the text in Words per Minute
+     * @param int          $imageTime Speed of reading the image in seconds
+     * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
+     *                                characters in Characters per Minute
      */
     public function __construct(
-        string|array $content,
-        int $wordSpeed = 265,
-        int $imageTime = 12,
-        int $cjkSpeed = 500
+        private string|array $content,
+        private int $wordSpeed = 265,
+        private int $imageTime = 12,
+        private int $cjkSpeed = 500
     ) {
         $this->content = $this->parseContent($content)['content'];
         $this->dirtyContent = $this->parseContent($content)['dirtyContent'];
@@ -57,15 +62,9 @@ class ReadTime
 
     /**
      * Parse the given content so it can be output as a read time
-     *
-     * @param mixed $content String or array of content
      */
-    private function parseContent($content): array
+    private function parseContent(string|array $content): array
     {
-        if (! is_string($content) && ! is_array($content)) {
-            throw new \Exception('Content must be type of array or string');
-        }
-
         if (is_array($content)) {
             $content = collect($content)->flatten();
         }
@@ -103,10 +102,8 @@ class ReadTime
 
     /**
      * Read time of the words in the input string (in minutes)
-     *
-     * @return float
      */
-    private function wordReadTime()
+    private function wordReadTime(): int|float
     {
         return $this->wordsCount() / $this->wordsPerMin;
     }
@@ -121,10 +118,8 @@ class ReadTime
 
     /**
      * Read time of the Chinese / Japanese / Korean in the input (in minutes)
-     *
-     * @return float
      */
-    private function wordReadTimeCJK()
+    private function wordReadTimeCJK(): int|float
     {
         return $this->wordsCountCJK() / $this->charactersPerMin;
     }
@@ -141,10 +136,8 @@ class ReadTime
 
     /**
      * Read Time of the images in the input string (in minutes)
-     *
-     * @return float
      */
-    private function imageReadTime()
+    private function imageReadTime(): float
     {
         $second = 0;
         $totalImages = $this->imagesCount();
@@ -202,9 +195,9 @@ class ReadTime
      *
      * @param string|null $key The translation key
      *
-     * @return mixed array if no key is passed, or string if existing key is passed
+     * @return array|string array if no key is passed, or string if existing key is passed
      */
-    private function getTranslation($key = null)
+    private function getTranslation(string|null $key = null): array|string
     {
         return is_null($key) ? $this->translations : $this->translations[$key];
     }
