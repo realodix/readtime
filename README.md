@@ -46,7 +46,7 @@ You may also pass several arguments to the constructor if you wish to change set
 
 ```php
 /**
- * @param string|array $content
+ * @param string|array $content   The content to analyze
  * @param int          $wordSpeed Speed of reading the text in Words per Minute
  * @param int          $imageTime Speed of reading the image in seconds
  * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
