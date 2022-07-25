@@ -6,10 +6,6 @@ class ReadTime
 {
     private string $dirtyContent;
 
-    private int $wpm;
-
-    private int $cpm;
-
     private array $translations = [];
 
     /**
