@@ -6,24 +6,24 @@ class ReadTime
 {
     private string $dirtyContent;
 
-    private int $wordsPerMin;
+    private int $wpm;
 
-    private int $charactersPerMin;
+    private int $cpm;
 
     private array $translations = [];
 
     /**
      * @param string|array $content   The content to analyze
-     * @param int          $wordSpeed Speed of reading the text in Words per Minute
+     * @param int          $wpm       Speed of reading the text in Words per Minute
      * @param int          $imageTime Speed of reading the image in seconds
-     * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
+     * @param int          $cpm       Speed of reading the Chinese / Korean / Japanese
      *                                characters in Characters per Minute
      */
     public function __construct(
         private string|array $content,
-        private int $wordSpeed = 265,
+        private int $wpm = 265,
         private int $imageTime = 12,
-        private int $cjkSpeed = 500
+        private int $cpm = 500
     ) {
         if (is_array($content)) {
             $content = collect($content)->flatten();
@@ -31,9 +31,9 @@ class ReadTime
 
         $this->content = $this->cleanContent($content);
         $this->dirtyContent = $content;
-        $this->wordsPerMin = $wordSpeed;
+        $this->wpm = $wpm;
         $this->imageTime = $imageTime;
-        $this->charactersPerMin = $cjkSpeed;
+        $this->cpm = $cpm;
 
         $this->defaultTranslations();
     }
@@ -98,7 +98,7 @@ class ReadTime
      */
     private function wordReadTime(): int|float
     {
-        return $this->wordsCount() / $this->wordsPerMin;
+        return $this->wordsCount() / $this->wpm;
     }
 
     /**
@@ -114,7 +114,7 @@ class ReadTime
      */
     private function wordReadTimeCJK(): int|float
     {
-        return $this->wordsCountCJK() / $this->charactersPerMin;
+        return $this->wordsCountCJK() / $this->cpm;
     }
 
     /**
