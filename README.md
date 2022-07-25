@@ -52,7 +52,7 @@ You may also pass several arguments to the constructor if you wish to change set
  * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
  *                                characters in Characters per Minute
  */
-$readTime = new ReadTime($content, int $wordSpeed = 265, int $imageTime = 12, int $cjkSpeed = 500);
+$readTime = new ReadTime($content, $wordSpeed = 265, $imageTime = 12, $cjkSpeed = 500);
 
 echo $readTime->get();
 ```
@@ -67,6 +67,8 @@ $readTime = new ReadTime([$content, $moreContent, $evenMoreContent]);
 
 echo $readTime->get();
 ```
+
+> :exclamation: [Named arguments](https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments) are not covered by Realodix Readtime backwards compatibility guidelines. We may choose to rename function arguments when necessary in order to improve codebase. Therefore, using named arguments when calling methods should be done cautiously and with the understanding that the parameter names may change in the future.
 
 ### Methods
 
