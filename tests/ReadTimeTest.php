@@ -145,19 +145,19 @@ class ReadTimeTest extends TestCase
     {
         $wpm = 265;
         $imageTime = 12;
-        $cjkSpeed = 500;
+        $cpm = 500;
         $totalWords = $wpm * 2;
         $t_img = 2;
         $cjkCharacters = '陳港生'  // Jackie Chan
                           .'るろうに剣心' // Rurouni Kenshin
                           .'김제니'; // Jennie Kim
-        $actualDuration = ($totalWords / $wpm) + (($imageTime + ($imageTime - 1)) / 60) + (mb_strlen($cjkCharacters) / $cjkSpeed);
+        $actualDuration = ($totalWords / $wpm) + (($imageTime + ($imageTime - 1)) / 60) + (mb_strlen($cjkCharacters) / $cpm);
 
         $content = str_repeat('<img src="image.jpg">', $t_img)
                    .str_repeat('word ', $totalWords)
                    .$cjkCharacters;
 
-        $actual = (new ReadTime($content, $wpm, $imageTime, $cjkSpeed))->toArray();
+        $actual = (new ReadTime($content, $wpm, $imageTime, $cpm))->toArray();
 
         $expected = [
             'duration'        => '3 min read',
