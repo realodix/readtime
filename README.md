@@ -46,7 +46,7 @@ You may also pass several arguments to the constructor if you wish to change set
 
 ```php
 /**
- * @param string|array $content
+ * @param string|array $content   The content to analyze
  * @param int          $wordSpeed Speed of reading the text in Words per Minute
  * @param int          $imageTime Speed of reading the image in seconds
  * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
@@ -95,11 +95,11 @@ Get the contents and settings of the class as a JSON string.
     'duration'        => '6 min read',
     'actual_duration' => 5.55,
     'total_words'     => 1325,
-    'total_words_cjk' => 0, 
-    'total_images'    => 3, 
-    'word_time'       => 5.660, 
-    'word_time_cjk'   => 0, 
-    'image_time'      => 0.55, 
+    'total_words_cjk' => 0,
+    'total_images'    => 3,
+    'word_time'       => 5.660,
+    'word_time_cjk'   => 0,
+    'image_time'      => 0.55,
 ];
 ```
 
