@@ -9,18 +9,18 @@ class ReadTimeTest extends TestCase
     /** @test */
     public function readTime()
     {
-        $wordSpeed = 265;
+        $wpm = 265;
         $this->assertSame(
             'less than a minute',
-            (new ReadTime(str_repeat('word', 3), $wordSpeed))->get()
+            (new ReadTime(str_repeat('word', 3), $wpm))->get()
         );
         $this->assertSame(
             '1 min read',
-            (new ReadTime(str_repeat('word ', $wordSpeed), $wordSpeed))->get()
+            (new ReadTime(str_repeat('word ', $wpm), $wpm))->get()
         );
         $this->assertSame(
             '3 min read',
-            (new ReadTime(str_repeat('word ', $wordSpeed * 3), $wordSpeed))->get()
+            (new ReadTime(str_repeat('word ', $wpm * 3), $wpm))->get()
         );
     }
 
@@ -33,25 +33,25 @@ class ReadTimeTest extends TestCase
      */
     public function readingSpeedMustAdjustToTheLanguage()
     {
-        $wordSpeed = 1;
-        $content = str_repeat('a ', $wordSpeed);
-        $actual = (new ReadTime($content, $wordSpeed))->toArray();
-        $this->assertSame($wordSpeed, $actual['word_time']);
+        $wpm = 1;
+        $content = str_repeat('a ', $wpm);
+        $actual = (new ReadTime($content, $wpm))->toArray();
+        $this->assertSame($wpm, $actual['word_time']);
 
-        $content = str_repeat('陳る김', $wordSpeed);
-        $actual = (new ReadTime($content, $wordSpeed, 12, 3))->toArray();
+        $content = str_repeat('陳る김', $wpm);
+        $actual = (new ReadTime($content, $wpm, 12, 3))->toArray();
         $this->assertSame(1, $actual['word_time_cjk']);
     }
 
     /** @test */
     public function canInputArray()
     {
-        $wordSpeed = 265;
-        $article = str_repeat('word ', $wordSpeed);
+        $wpm = 265;
+        $article = str_repeat('word ', $wpm);
         $array = [$article, $article, $article, $article];
 
         $this->assertSame(
-            $wordSpeed * 4,
+            $wpm * 4,
             (new ReadTime($array))->toArray()['total_words']
         );
     }
@@ -59,12 +59,12 @@ class ReadTimeTest extends TestCase
     /** @test */
     public function canInputArrayMultiDimensional()
     {
-        $wordSpeed = 265;
-        $article = str_repeat('word ', $wordSpeed);
+        $wpm = 265;
+        $article = str_repeat('word ', $wpm);
         $array = [$article, [$article, $article], ['a' => ['b' => [$article]]]];
 
         $this->assertSame(
-            $wordSpeed * 4,
+            $wpm * 4,
             (new ReadTime($array))->toArray()['total_words']
         );
     }
@@ -72,24 +72,24 @@ class ReadTimeTest extends TestCase
     /** @test */
     public function duration()
     {
-        $wordSpeed = 60;
+        $wpm = 60;
 
-        $article = str_repeat('word ', ($wordSpeed / 2) - 1);
+        $article = str_repeat('word ', ($wpm / 2) - 1);
         $this->assertSame(
             'less than a minute',
-            (new ReadTime($article, $wordSpeed))->toArray()['duration']
+            (new ReadTime($article, $wpm))->toArray()['duration']
         );
 
-        $article = str_repeat('word ', ($wordSpeed / 2));
+        $article = str_repeat('word ', ($wpm / 2));
         $this->assertSame(
             '1 min read',
-            (new ReadTime($article, $wordSpeed))->toArray()['duration']
+            (new ReadTime($article, $wpm))->toArray()['duration']
         );
 
-        $article = str_repeat('word ', ($wordSpeed * 1.5));
+        $article = str_repeat('word ', ($wpm * 1.5));
         $this->assertSame(
             '2 min read',
-            (new ReadTime($article, $wordSpeed))->toArray()['duration']
+            (new ReadTime($article, $wpm))->toArray()['duration']
         );
     }
 
@@ -143,21 +143,21 @@ class ReadTimeTest extends TestCase
     /** @test */
     public function outputArray()
     {
-        $wordSpeed = 265;
+        $wpm = 265;
         $imageTime = 12;
         $cjkSpeed = 500;
-        $totalWords = $wordSpeed * 2;
+        $totalWords = $wpm * 2;
         $t_img = 2;
         $cjkCharacters = '陳港生'  // Jackie Chan
                           .'るろうに剣心' // Rurouni Kenshin
                           .'김제니'; // Jennie Kim
-        $actualDuration = ($totalWords / $wordSpeed) + (($imageTime + ($imageTime - 1)) / 60) + (mb_strlen($cjkCharacters) / $cjkSpeed);
+        $actualDuration = ($totalWords / $wpm) + (($imageTime + ($imageTime - 1)) / 60) + (mb_strlen($cjkCharacters) / $cjkSpeed);
 
         $content = str_repeat('<img src="image.jpg">', $t_img)
                    .str_repeat('word ', $totalWords)
                    .$cjkCharacters;
 
-        $actual = (new ReadTime($content, $wordSpeed, $imageTime, $cjkSpeed))->toArray();
+        $actual = (new ReadTime($content, $wpm, $imageTime, $cjkSpeed))->toArray();
 
         $expected = [
             'duration'        => '3 min read',

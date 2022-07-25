@@ -10,7 +10,7 @@ class ReadTime
 
     private string $dirtyContent;
 
-    private int $wordsPerMin;
+    private int $wpm;
 
     private int $imageTime;
 
@@ -20,12 +20,12 @@ class ReadTime
 
     /**
      * @param string|array $content   The content to analyze
-     * @param int          $wordSpeed Speed of reading the text in Words per Minute
+     * @param int          $wpm       Speed of reading the text in Words per Minute
      * @param int          $imageTime Speed of reading the image in seconds
      * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
      *                                characters in Characters per Minute
      */
-    public function __construct($content, int $wordSpeed = 265, int $imageTime = 12, int $cjkSpeed = 500)
+    public function __construct($content, int $wpm = 265, int $imageTime = 12, int $cjkSpeed = 500)
     {
         if (! is_string($content) && ! is_array($content)) {
             throw new \Exception('Content must be type of array or string');
@@ -37,7 +37,7 @@ class ReadTime
 
         $this->content = $this->cleanContent($content);
         $this->dirtyContent = $content;
-        $this->wordsPerMin = $wordSpeed;
+        $this->wpm = $wpm;
         $this->imageTime = $imageTime;
         $this->charactersPerMin = $cjkSpeed;
 
@@ -106,7 +106,7 @@ class ReadTime
      */
     private function wordReadTime()
     {
-        return $this->wordsCount() / $this->wordsPerMin;
+        return $this->wordsCount() / $this->wpm;
     }
 
     /**
