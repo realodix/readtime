@@ -25,12 +25,8 @@ class ReadTime
         private int $imageTime = 12,
         private int $cjkSpeed = 500
     ) {
-        if (! is_string($content) && ! is_array($content)) {
-            throw new \Exception('Content must be type of array or string');
-        }
-
         if (is_array($content)) {
-            $content = Arr::from($content)->flat()->join();
+            $content = collect($content)->flatten();
         }
 
         $this->content = $this->cleanContent($content);
