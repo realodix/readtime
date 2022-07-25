@@ -25,8 +25,8 @@ class ReadTime
             $content = collect($content)->flatten();
         }
 
-        $this->content = $this->cleanContent($content);
-        $this->dirtyContent = $content;
+        $this->content = $this->cleanContent((string) $content);
+        $this->dirtyContent = (string) $content;
         $this->wpm = $wpm;
         $this->imageTime = $imageTime;
         $this->cpm = $cpm;
