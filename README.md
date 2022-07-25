@@ -52,7 +52,7 @@ You may also pass several arguments to the constructor if you wish to change set
  * @param int          $cjkSpeed  Speed of reading the Chinese / Korean / Japanese
  *                                characters in Characters per Minute
  */
-$readTime = new ReadTime($content, int $wordSpeed = 265, int $imageTime = 12, int $cjkSpeed = 500);
+$readTime = new ReadTime($content, $wordSpeed = 265, $imageTime = 12, $cjkSpeed = 500);
 
 echo $readTime->get();
 ```
