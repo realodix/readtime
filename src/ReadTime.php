@@ -8,6 +8,8 @@ class ReadTime
 {
     private string $content;
 
+    private string $dirtyContent;
+
     private int $wordsPerMin;
 
     private int $imageTime;
@@ -15,8 +17,6 @@ class ReadTime
     private int $charactersPerMin;
 
     private array $translations = [];
-
-    private string $dirtyContent;
 
     /**
      * @param string|array $content   The content to analyze
@@ -27,8 +27,16 @@ class ReadTime
      */
     public function __construct($content, int $wordSpeed = 265, int $imageTime = 12, int $cjkSpeed = 500)
     {
-        $this->content = $this->parseContent($content)['content'];
-        $this->dirtyContent = $this->parseContent($content)['dirtyContent'];
+        if (! is_string($content) && ! is_array($content)) {
+            throw new \Exception('Content must be type of array or string');
+        }
+
+        if (is_array($content)) {
+            $content = Arr::from($content)->flat()->join();
+        }
+
+        $this->content = $this->cleanContent($content);
+        $this->dirtyContent = $content;
         $this->wordsPerMin = $wordSpeed;
         $this->imageTime = $imageTime;
         $this->charactersPerMin = $cjkSpeed;
@@ -64,27 +72,6 @@ class ReadTime
     public function toJson(): string
     {
         return json_encode($this->toArray());
-    }
-
-    /**
-     * Parse the given content so it can be output as a read time
-     *
-     * @param mixed $content String or array of content
-     */
-    private function parseContent($content): array
-    {
-        if (! is_string($content) && ! is_array($content)) {
-            throw new \Exception('Content must be type of array or string');
-        }
-
-        if (is_array($content)) {
-            $content = Arr::from($content)->flat()->join();
-        }
-
-        return [
-            'content'      => $this->cleanContent($content),
-            'dirtyContent' => $content,
-        ];
     }
 
     /**
