@@ -1,6 +1,6 @@
 # Read time
 
-![PHPVersion](https://img.shields.io/badge/PHP-^8-777BB4.svg?style=flat-square)
+![PHPVersion](https://img.shields.io/badge/PHP-8-777BB4.svg?style=flat-square)
 ![Build Status](https://github.com/realodix/readtime/actions/workflows/ci.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/realodix/readtime?style=flat-square)](https://github.com/realodix/readtime/blob/main/LICENSE)
 
