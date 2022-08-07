@@ -4,7 +4,7 @@ use Realodix\CsConfig\Config;
 use Realodix\CsConfig\Finder;
 use Realodix\CsConfig\Rules\Realodix;
 
-$addOrOverrideRules = [
+$localRules = [
     // Realodix
     'binary_operator_spaces' => [
         'operators' => [
@@ -16,5 +16,5 @@ $addOrOverrideRules = [
 $finder = Finder::base(__DIR__)
     ->append(['.php-cs-fixer.dist.php']);
 
-return Config::create(new Realodix($addOrOverrideRules))
+return Config::create(new Realodix($localRules))
     ->setFinder($finder);
