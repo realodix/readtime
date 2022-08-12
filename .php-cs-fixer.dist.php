@@ -1,8 +1,7 @@
 <?php
 
-use Realodix\CsConfig\Config;
-use Realodix\CsConfig\Finder;
-use Realodix\CsConfig\Rules\Realodix;
+use Realodix\Relax\Config;
+use Realodix\Relax\Finder;
 
 $localRules = [
     // Realodix
@@ -13,8 +12,8 @@ $localRules = [
     ],
 ];
 
-$finder = Finder::base(__DIR__)
+$finder = Finder::base()
     ->append(['.php-cs-fixer.dist.php']);
 
-return Config::create(new Realodix($localRules))
+return Config::create('@Realodix', $localRules)
     ->setFinder($finder);
