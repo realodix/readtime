@@ -71,14 +71,13 @@ class ReadTime
     {
         $readTime = $this->actualDuration();
 
-        if ($readTime < 0.5) {
-            return $this->getTranslation('less_than');
-        }
-        if ($readTime < 1.5) {
-            return $this->getTranslation('one_min');
-        }
+        $duration = match (true) {
+            $readTime < 0.5 => $this->getTranslation('less_than'),
+            $readTime < 1.5 => $this->getTranslation('one_min'),
+            default         => ceil($readTime).' '.$this->getTranslation('more_than'),
+        };
 
-        return ceil($readTime).' '.$this->getTranslation('more_than');
+        return $duration;
     }
 
     /**
