@@ -130,7 +130,8 @@ class ReadTime
         $second = 0;
         $totalImages = $this->imagesCount();
 
-        // For the first image add 12 seconds, second image add 11, ..., for image 10+ add 3 seconds.
+        // For the first image add 12 seconds, second image add 11, ...,
+        // for image 10+ add 3 seconds.
         for ($i = 1; $i <= $totalImages; $i++) {
             if ($i > 9) {
                 $second += 3;
