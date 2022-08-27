@@ -119,8 +119,7 @@ Get the contents and settings of the class as a JSON string.
 
 
 ## Contributing
-
 Thank you for your interest in ReadTime. Please check out our [contributing guide](/CONTRIBUTING.md).
-## License
 
+## License
 This package is licensed using the [MIT License](/LICENSE).
