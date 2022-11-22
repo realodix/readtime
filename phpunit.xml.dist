@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true"
-         verbose="true">
+<phpunit
+    cacheResultFile=".tmp/.phpunit.result.cache"
+    colors="true"
+    verbose="true"
+>
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <coverage
+        cacheDirectory=".tmp/PHPUnit"
+        processUncoveredFiles="true"
+    >
         <include>
             <directory suffix=".php">src</directory>
         </include>
