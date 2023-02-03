@@ -11,7 +11,7 @@
         "league/config": "^1.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6",
         "realodix/relax": "dev-main"
     },
     "minimum-stability": "dev",
