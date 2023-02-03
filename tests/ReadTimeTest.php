@@ -178,7 +178,7 @@ class ReadTimeTest extends TestCase
      *
      * @test
      */
-    public function canSetTranslation()
+    public function setTranslation()
     {
         $customTranslation = 'foo';
         $actual = (new ReadTime('word'))
@@ -186,6 +186,21 @@ class ReadTimeTest extends TestCase
                   ->get();
 
         $this->assertSame($customTranslation, $actual);
+    }
+
+    /**
+     * Set translation with wrong key, and it should return default translation
+     *
+     * @test
+     */
+    public function setTranslationDefault()
+    {
+        $customTranslation = 'bar';
+        $actual = (new ReadTime('word'))
+                  ->setTranslation(['foo' => $customTranslation])
+                  ->get();
+
+        $this->assertNotSame($customTranslation, $actual);
     }
 
     /**
