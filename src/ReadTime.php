@@ -4,8 +4,6 @@ namespace Realodix\ReadTime;
 
 class ReadTime
 {
-    private string $dirtyContent;
-
     private array $translations = [];
 
     /**
@@ -21,16 +19,6 @@ class ReadTime
         private int $imageTime = 12,
         private int $cpm = 500
     ) {
-        if (is_array($content)) {
-            $content = collect($content)->flatten();
-        }
-
-        $this->content = $this->cleanContent((string) $content);
-        $this->dirtyContent = (string) $content;
-        $this->wpm = $wpm;
-        $this->imageTime = $imageTime;
-        $this->cpm = $cpm;
-
         $this->defaultTranslations();
     }
 
@@ -40,9 +28,28 @@ class ReadTime
     }
 
     /**
-     * Return an array of the class data
+     * Set the translation keys for the read time string
+     *
+     * @param array $tr An associative array of translation text
+     * @return self
      */
-    public function toArray(): array
+    public function setTranslation(array $tr)
+    {
+        $this->translations = [
+            'less_than' => isset($tr['less_than']) ? $tr['less_than'] : 'less than a minute',
+            'one_min'   => isset($tr['one_min']) ? $tr['one_min'] : '1 min read',
+            'more_than' => isset($tr['more_than']) ? $tr['more_than'] : 'min read',
+        ];
+
+        return $this;
+    }
+
+    /**
+     * Get the contents and settings of the class as an array.
+     *
+     * @return array
+     */
+    public function toArray()
     {
         return [
             'duration'        => $this->duration(),
@@ -57,11 +64,43 @@ class ReadTime
     }
 
     /**
-     * Return a json string of the class data
+     * Get the contents and settings of the class as a JSON string
+     *
+     * @return string
      */
-    public function toJson(): string
+    public function toJson()
     {
         return json_encode($this->toArray());
+    }
+
+    /**
+     * Get the content and flatten the array if it is an array
+     */
+    private function getContent(): string
+    {
+        $content = $this->content;
+
+        if (is_array($content)) {
+            $content = collect($content)->flatten();
+        }
+
+        return $content;
+    }
+
+    /**
+     * Strip html tags from content
+     */
+    private function cleanContent(): string
+    {
+        return strip_tags($this->getContent());
+    }
+
+    /**
+     * Get the dirty content
+     */
+    private function dirtyContent(): string
+    {
+        return $this->getContent();
     }
 
     /**
@@ -101,7 +140,7 @@ class ReadTime
      */
     private function wordsCount(): int
     {
-        return str_word_count($this->content);
+        return str_word_count($this->cleanContent());
     }
 
     /**
@@ -119,7 +158,7 @@ class ReadTime
     {
         $pattern = '/[\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}]/u';
 
-        return preg_match_all($pattern, $this->content, $matches);
+        return (int) preg_match_all($pattern, $this->cleanContent(), $matches);
     }
 
     /**
@@ -150,7 +189,7 @@ class ReadTime
     {
         $pattern = '/<(img)([\W\w]+?)(src=")([\W\w]+?)[\/]?>/';
 
-        return preg_match_all($pattern, $this->dirtyContent, $matches);
+        return (int) preg_match_all($pattern, $this->dirtyContent(), $matches);
     }
 
     /**
@@ -162,40 +201,13 @@ class ReadTime
     }
 
     /**
-     * Set the translation keys for the read time string
-     *
-     * @param array $tr An associative array of translation text
-     *
-     * @return self
-     */
-    public function setTranslation(array $tr)
-    {
-        $this->translations = [
-            'less_than' => isset($tr['less_than']) ? $tr['less_than'] : 'less than a minute',
-            'one_min'   => isset($tr['one_min']) ? $tr['one_min'] : '1 min read',
-            'more_than' => isset($tr['more_than']) ? $tr['more_than'] : 'min read',
-        ];
-
-        return $this;
-    }
-
-    /**
      * Get the translation array or specific key
      *
      * @param string|null $key The translation key
-     *
      * @return array|string array if no key is passed, or string if existing key is passed
      */
     private function getTranslation(string|null $key = null): array|string
     {
         return is_null($key) ? $this->translations : $this->translations[$key];
-    }
-
-    /**
-     * Strip html tags from content
-     */
-    private function cleanContent(string $content): string
-    {
-        return strip_tags($content);
     }
 }
