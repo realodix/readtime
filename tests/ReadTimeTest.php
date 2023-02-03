@@ -173,14 +173,47 @@ class ReadTimeTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    /** @test */
-    public function canSetTranslation()
+    /**
+     * Translation must be able to be changed as needed
+     *
+     * @test
+     */
+    public function setTranslation()
     {
-        $customTranslation = 'foobar';
+        $customTranslation = 'foo';
         $actual = (new ReadTime('word'))
                   ->setTranslation(['less_than' => $customTranslation])
                   ->get();
 
         $this->assertSame($customTranslation, $actual);
+    }
+
+    /**
+     * Set translation with wrong key, and it should return default translation
+     *
+     * @test
+     */
+    public function setTranslationDefault()
+    {
+        $customTranslation = 'bar';
+        $actual = (new ReadTime('word'))
+                  ->setTranslation(['foo' => $customTranslation])
+                  ->get();
+
+        $this->assertNotSame($customTranslation, $actual);
+    }
+
+    /**
+     * Translation must be in accordance with data type
+     *
+     * @test
+     */
+    public function setTranslationDataType()
+    {
+        $this->expectException(\League\Config\Exception\ValidationException::class);
+
+        (new ReadTime('word'))
+            ->setTranslation(['less_than' => true])
+            ->get();
     }
 }

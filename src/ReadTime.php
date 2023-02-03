@@ -2,9 +2,12 @@
 
 namespace Realodix\ReadTime;
 
+use League\Config\Configuration;
+use Nette\Schema\Expect;
+
 class ReadTime
 {
-    private array $translations = [];
+    private array $translations;
 
     /**
      * @param string|array $content   The content to analyze
@@ -30,16 +33,11 @@ class ReadTime
     /**
      * Set the translation keys for the read time string
      *
-     * @param array $tr An associative array of translation text
-     * @return self
+     * @param array $value An associative array of translation text
      */
-    public function setTranslation(array $tr)
+    public function setTranslation(array $value): self
     {
-        $this->translations = [
-            'less_than' => isset($tr['less_than']) ? $tr['less_than'] : 'less than a minute',
-            'one_min'   => isset($tr['one_min']) ? $tr['one_min'] : '1 min read',
-            'more_than' => isset($tr['more_than']) ? $tr['more_than'] : 'min read',
-        ];
+        $this->translations = $value;
 
         return $this;
     }
@@ -111,12 +109,28 @@ class ReadTime
         $readTime = $this->actualDuration();
 
         $duration = match (true) {
-            $readTime < 0.5 => $this->getTranslation('less_than'),
-            $readTime < 1.5 => $this->getTranslation('one_min'),
-            default         => ceil($readTime).' '.$this->getTranslation('more_than'),
+            $readTime < 0.5 => $this->translation()->get('less_than'),
+            $readTime < 1.5 => $this->translation()->get('one_min'),
+            default         => ceil($readTime).' '.$this->translation()->get('more_than'),
         };
 
         return $duration;
+    }
+
+    /**
+     * @return Configuration
+     */
+    private function translation()
+    {
+        $config = new Configuration([
+            'less_than' => Expect::string()->default('less than a minute'),
+            'one_min'   => Expect::string()->default('1 min read'),
+            'more_than' => Expect::string()->default('min read'),
+        ]);
+
+        $config->merge($this->translations);
+
+        return $config;
     }
 
     /**
@@ -198,16 +212,5 @@ class ReadTime
     private function defaultTranslations(): void
     {
         $this->setTranslation([]);
-    }
-
-    /**
-     * Get the translation array or specific key
-     *
-     * @param string|null $key The translation key
-     * @return array|string array if no key is passed, or string if existing key is passed
-     */
-    private function getTranslation(string|null $key = null): array|string
-    {
-        return is_null($key) ? $this->translations : $this->translations[$key];
     }
 }
