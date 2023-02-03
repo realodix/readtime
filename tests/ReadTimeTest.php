@@ -193,14 +193,13 @@ class ReadTimeTest extends TestCase
      *
      * @test
      */
-    public function setTranslationDefault()
+    public function setTranslationWithWrongKey()
     {
-        $customTranslation = 'bar';
-        $actual = (new ReadTime('word'))
-                  ->setTranslation(['foo' => $customTranslation])
-                  ->get();
+        $this->expectException(\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException::class);
 
-        $this->assertNotSame($customTranslation, $actual);
+        (new ReadTime('word'))
+            ->setTranslation(['foo' => 'bar'])
+            ->get();
     }
 
     /**
@@ -208,9 +207,9 @@ class ReadTimeTest extends TestCase
      *
      * @test
      */
-    public function setTranslationDataType()
+    public function setTranslationWithWrongDataType()
     {
-        $this->expectException(\League\Config\Exception\ValidationException::class);
+        $this->expectException(\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException::class);
 
         (new ReadTime('word'))
             ->setTranslation(['less_than' => true])

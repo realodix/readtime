@@ -4,6 +4,7 @@ namespace Realodix\ReadTime;
 
 use League\Config\Configuration;
 use Nette\Schema\Expect;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReadTime
 {
@@ -109,9 +110,9 @@ class ReadTime
         $readTime = $this->actualDuration();
 
         $duration = match (true) {
-            $readTime < 0.5 => $this->translation()->get('less_than'),
-            $readTime < 1.5 => $this->translation()->get('one_min'),
-            default         => ceil($readTime).' '.$this->translation()->get('more_than'),
+            $readTime < 0.5 => $this->translation()['less_than'],
+            $readTime < 1.5 => $this->translation()['one_min'],
+            default         => ceil($readTime).' '.$this->translation()['more_than'],
         };
 
         return $duration;
@@ -122,15 +123,25 @@ class ReadTime
      */
     private function translation()
     {
-        $config = new Configuration([
-            'less_than' => Expect::string()->default('less than a minute'),
-            'one_min'   => Expect::string()->default('1 min read'),
-            'more_than' => Expect::string()->default('min read'),
-        ]);
+        $resolver = new OptionsResolver();
 
-        $config->merge($this->translations);
+        // $resolver->setDefault('less_than', 'less than a minute')
+        //     ->setAllowedTypes('less_than', 'string');
+        // $resolver->setDefault('one_min', '1 min read')
+        //     ->setAllowedTypes('one_min', 'string');
+        // $resolver->setDefault('more_than', 'min read')
+        //     ->setAllowedTypes('more_than', 'string');
+        $resolver->define('less_than')
+            ->default('less than a minute')
+            ->allowedTypes('string');
+        $resolver->define('one_min')
+            ->default('1 min read')
+            ->allowedTypes('string');
+        $resolver->define('more_than')
+            ->default('min read')
+            ->allowedTypes('string');
 
-        return $config;
+        return $resolver->resolve($this->translations);
     }
 
     /**
