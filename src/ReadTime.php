@@ -45,9 +45,11 @@ class ReadTime
     }
 
     /**
-     * Return an array of the class data
+     * Get the contents and settings of the class as an array.
+     *
+     * @return array
      */
-    public function toArray(): array
+    public function toArray()
     {
         return [
             'duration'        => $this->duration(),
@@ -62,7 +64,7 @@ class ReadTime
     }
 
     /**
-     * Return a json string of the class data
+     * Get the contents and settings of the class as a JSON string
      *
      * @return string
      */
