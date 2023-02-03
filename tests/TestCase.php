@@ -12,10 +12,9 @@ class TestCase extends BaseTestCase
      * @param object $object     Instantiated object that we will run method on.
      * @param string $method     Method name to call.
      * @param array  $parameters Array of parameters to pass into method.
+     * @return mixed Method return.
      *
      * @throws \Exception
-     *
-     * @return mixed Method return.
      */
     protected function getReflection($object, string $method, array $parameters = [])
     {
