@@ -4,7 +4,7 @@ namespace Realodix\ReadTime;
 
 class ReadTime
 {
-    private array $translations;
+    private array $translations = [];
 
     /**
      * @param string|array $content   The content to analyze
@@ -19,7 +19,6 @@ class ReadTime
         private int $imageTime = 12,
         private int $cpm = 500
     ) {
-        $this->defaultTranslations();
     }
 
     public function get(): string
@@ -203,13 +202,5 @@ class ReadTime
         $pattern = '/<(img)([\W\w]+?)(src=")([\W\w]+?)[\/]?>/';
 
         return (int) preg_match_all($pattern, $this->dirtyContent(), $matches);
-    }
-
-    /**
-     * Set the default translation when the class is instantiated
-     */
-    private function defaultTranslations(): void
-    {
-        $this->setTranslation([]);
     }
 }
