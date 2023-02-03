@@ -176,7 +176,7 @@ class ReadTimeTest extends TestCase
     /** @test */
     public function canSetTranslation()
     {
-        $customTranslation = 'foobar';
+        $customTranslation = 'foo';
         $actual = (new ReadTime('word'))
                   ->setTranslation(['less_than' => $customTranslation])
                   ->get();
