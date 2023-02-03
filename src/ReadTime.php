@@ -33,12 +33,11 @@ class ReadTime
     /**
      * Set the translation keys for the read time string
      *
-     * @param array $tr An associative array of translation text
-     * @return self
+     * @param array $value An associative array of translation text
      */
-    public function setTranslation(array $tr)
+    public function setTranslation(array $value): self
     {
-        $this->translations = $tr;
+        $this->translations = $value;
 
         return $this;
     }
