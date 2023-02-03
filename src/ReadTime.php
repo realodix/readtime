@@ -65,7 +65,7 @@ class ReadTime
      */
     public function toJson()
     {
-        return json_encode($this->toArray());
+        return collect($this->toArray())->toJson();
     }
 
     /**
