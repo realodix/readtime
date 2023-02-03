@@ -28,6 +28,23 @@ class ReadTime
     }
 
     /**
+     * Set the translation keys for the read time string
+     *
+     * @param array $tr An associative array of translation text
+     * @return self
+     */
+    public function setTranslation(array $tr)
+    {
+        $this->translations = [
+            'less_than' => isset($tr['less_than']) ? $tr['less_than'] : 'less than a minute',
+            'one_min'   => isset($tr['one_min']) ? $tr['one_min'] : '1 min read',
+            'more_than' => isset($tr['more_than']) ? $tr['more_than'] : 'min read',
+        ];
+
+        return $this;
+    }
+
+    /**
      * Return an array of the class data
      */
     public function toArray(): array
@@ -179,23 +196,6 @@ class ReadTime
     private function defaultTranslations(): void
     {
         $this->setTranslation([]);
-    }
-
-    /**
-     * Set the translation keys for the read time string
-     *
-     * @param array $tr An associative array of translation text
-     * @return self
-     */
-    public function setTranslation(array $tr)
-    {
-        $this->translations = [
-            'less_than' => isset($tr['less_than']) ? $tr['less_than'] : 'less than a minute',
-            'one_min'   => isset($tr['one_min']) ? $tr['one_min'] : '1 min read',
-            'more_than' => isset($tr['more_than']) ? $tr['more_than'] : 'min read',
-        ];
-
-        return $this;
     }
 
     /**
