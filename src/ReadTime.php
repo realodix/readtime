@@ -2,9 +2,6 @@
 
 namespace Realodix\ReadTime;
 
-use League\Config\Configuration;
-use Nette\Schema\Expect;
-
 class ReadTime
 {
     private array $translations;
@@ -107,30 +104,32 @@ class ReadTime
     private function duration(): string
     {
         $readTime = $this->actualDuration();
+        $tr = $this->translation();
 
         $duration = match (true) {
-            $readTime < 0.5 => $this->translation()->get('less_than'),
-            $readTime < 1.5 => $this->translation()->get('one_min'),
-            default         => ceil($readTime).' '.$this->translation()->get('more_than'),
+            $readTime < 0.5 => $tr['less_than'],
+            $readTime < 1.5 => $tr['one_min'],
+            default         => ceil($readTime).' '.$tr['more_than'],
         };
 
         return $duration;
     }
 
     /**
-     * @return Configuration
+     * @return array
      */
     private function translation()
     {
-        $config = new Configuration([
-            'less_than' => Expect::string()->default('less than a minute'),
-            'one_min'   => Expect::string()->default('1 min read'),
-            'more_than' => Expect::string()->default('min read'),
-        ]);
+        $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver;
 
-        $config->merge($this->translations);
+        $resolver->define('less_than')->default('less than a minute')
+            ->allowedTypes('string');
+        $resolver->define('one_min')->default('1 min read')
+            ->allowedTypes('string');
+        $resolver->define('more_than')->default('min read')
+            ->allowedTypes('string');
 
-        return $config;
+        return $resolver->resolve($this->translations);
     }
 
     /**
