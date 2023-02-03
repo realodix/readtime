@@ -2,10 +2,6 @@
 
 namespace Realodix\ReadTime;
 
-use League\Config\Configuration;
-use Nette\Schema\Expect;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class ReadTime
 {
     private array $translations;
@@ -108,37 +104,29 @@ class ReadTime
     private function duration(): string
     {
         $readTime = $this->actualDuration();
+        $tr = $this->translation();
 
         $duration = match (true) {
-            $readTime < 0.5 => $this->translation()['less_than'],
-            $readTime < 1.5 => $this->translation()['one_min'],
-            default         => ceil($readTime).' '.$this->translation()['more_than'],
+            $readTime < 0.5 => $tr['less_than'],
+            $readTime < 1.5 => $tr['one_min'],
+            default         => ceil($readTime).' '.$tr['more_than'],
         };
 
         return $duration;
     }
 
     /**
-     * @return Configuration
+     * @return array
      */
     private function translation()
     {
-        $resolver = new OptionsResolver();
+        $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver;
 
-        // $resolver->setDefault('less_than', 'less than a minute')
-        //     ->setAllowedTypes('less_than', 'string');
-        // $resolver->setDefault('one_min', '1 min read')
-        //     ->setAllowedTypes('one_min', 'string');
-        // $resolver->setDefault('more_than', 'min read')
-        //     ->setAllowedTypes('more_than', 'string');
-        $resolver->define('less_than')
-            ->default('less than a minute')
+        $resolver->define('less_than')->default('less than a minute')
             ->allowedTypes('string');
-        $resolver->define('one_min')
-            ->default('1 min read')
+        $resolver->define('one_min')->default('1 min read')
             ->allowedTypes('string');
-        $resolver->define('more_than')
-            ->default('min read')
+        $resolver->define('more_than')->default('min read')
             ->allowedTypes('string');
 
         return $resolver->resolve($this->translations);
