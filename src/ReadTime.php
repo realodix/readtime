@@ -119,16 +119,16 @@ class ReadTime
      */
     private function translation()
     {
-        $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver;
+        $optResolver = new \Symfony\Component\OptionsResolver\OptionsResolver;
 
-        $resolver->define('less_than')->default('less than a minute')
+        $optResolver->define('less_than')->default('less than a minute')
             ->allowedTypes('string');
-        $resolver->define('one_min')->default('1 min read')
+        $optResolver->define('one_min')->default('1 min read')
             ->allowedTypes('string');
-        $resolver->define('more_than')->default('min read')
+        $optResolver->define('more_than')->default('min read')
             ->allowedTypes('string');
 
-        return $resolver->resolve($this->translations);
+        return $optResolver->resolve($this->translations);
     }
 
     /**
