@@ -182,8 +182,8 @@ class ReadTimeTest extends TestCase
     {
         $customTranslation = 'foo';
         $actual = (new ReadTime('word'))
-                  ->setTranslation(['less_than' => $customTranslation])
-                  ->get();
+            ->setTranslation(['less_than' => $customTranslation])
+            ->get();
 
         $this->assertSame($customTranslation, $actual);
     }
