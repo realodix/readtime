@@ -10,6 +10,7 @@ class ReadTimeTest extends TestCase
     public function readTime()
     {
         $wpm = 265;
+
         $this->assertSame(
             'less than a minute',
             (new ReadTime(str_repeat('word', 3), $wpm))->get()
