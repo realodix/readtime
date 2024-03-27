@@ -13,10 +13,8 @@ class MediumTest extends TestCase
      * Reference
      * - https://medium.com/@dahul/inside-medium-94931f66eebd
      * - https://blog.medium.com/read-time-and-you-bc2048ab620c
-     *
-     * @test
      */
-    public function articleWithManyImages()
+    public function testArticlesThatContainManyImages()
     {
         $wpm = 265;
 
@@ -40,10 +38,8 @@ class MediumTest extends TestCase
      * Reference
      * - https://medium.com/@fchimero/this-should-only-take-a-minute-or-four-probably-e38bb7bf2adf
      * - https://blog.medium.com/read-time-and-you-bc2048ab620c
-     *
-     * @test
      */
-    public function complexityOfAnArticle()
+    public function testComplexArticle()
     {
         $wpm = 265;
 

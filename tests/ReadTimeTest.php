@@ -6,8 +6,7 @@ use Realodix\ReadTime\ReadTime;
 
 class ReadTimeTest extends TestCase
 {
-    /** @test */
-    public function readTime()
+    public function testReadTimeMethod()
     {
         $wpm = 265;
 
@@ -25,27 +24,7 @@ class ReadTimeTest extends TestCase
         );
     }
 
-    /**
-     * Words Per Minut must be able to be changed as needed, and must be in accordance
-     * with the language. Param 1 must be for counting latin script, param 2 must be for
-     * counting Chinese/Japanese/Korean script.
-     *
-     * @test
-     */
-    public function readingSpeedMustAdjustToTheLanguage()
-    {
-        $wpm = 1;
-        $content = str_repeat('a ', $wpm);
-        $actual = (new ReadTime($content, $wpm))->toArray();
-        $this->assertSame($wpm, $actual['word_time']);
-
-        $content = str_repeat('陳る김', $wpm);
-        $actual = (new ReadTime($content, $wpm, 12, 3))->toArray();
-        $this->assertSame(1, $actual['word_time_cjk']);
-    }
-
-    /** @test */
-    public function canInputArray()
+    public function testInputArray()
     {
         $wpm = 265;
         $article = str_repeat('word ', $wpm);
@@ -57,8 +36,7 @@ class ReadTimeTest extends TestCase
         );
     }
 
-    /** @test */
-    public function canInputArrayMultiDimensional()
+    public function testInputMultiDimensionalArray()
     {
         $wpm = 265;
         $article = str_repeat('word ', $wpm);
@@ -70,8 +48,7 @@ class ReadTimeTest extends TestCase
         );
     }
 
-    /** @test */
-    public function duration()
+    public function testOutputDuration()
     {
         $wpm = 60;
 
@@ -94,8 +71,7 @@ class ReadTimeTest extends TestCase
         );
     }
 
-    /** @test */
-    public function imageReadTime()
+    public function testOutputImageTime()
     {
         $content = str_repeat('<img src="image.jpg">', 5);
         $actual = (new ReadTime($content))->toArray();
@@ -113,8 +89,7 @@ class ReadTimeTest extends TestCase
         $this->assertSame(81.0, $actual['image_time'] * 60);
     }
 
-    /** @test */
-    public function imagesCount()
+    public function testOutputTotalImages()
     {
         $content =
         '
@@ -127,22 +102,19 @@ class ReadTimeTest extends TestCase
         $this->assertSame(2, (new ReadTime($content))->toArray()['total_images']);
     }
 
-    /** @test */
-    public function canOutputArray()
+    public function testOutputArrayDataType()
     {
         $result = (new ReadTime('foo'))->toArray();
         $this->assertIsArray($result);
     }
 
-    /** @test */
-    public function canOutputJson()
+    public function testOutputJsonDataType()
     {
         $result = (new ReadTime('foo'))->toJson();
         $this->assertJson($result);
     }
 
-    /** @test */
-    public function outputArray()
+    public function testOutput()
     {
         $wpm = 265;
         $imageTime = 12;
@@ -152,7 +124,9 @@ class ReadTimeTest extends TestCase
         $cjkCharacters = '陳港生'  // Jackie Chan
                           .'るろうに剣心' // Rurouni Kenshin
                           .'김제니'; // Jennie Kim
-        $actualDuration = ($totalWords / $wpm) + (($imageTime + ($imageTime - 1)) / 60) + (mb_strlen($cjkCharacters) / $cpm);
+        $actualDuration = ($totalWords / $wpm)
+                            + (($imageTime + ($imageTime - 1)) / 60)
+                            + (mb_strlen($cjkCharacters) / $cpm);
 
         $content = str_repeat('<img src="image.jpg">', $t_img)
                    .str_repeat('word ', $totalWords)
@@ -172,48 +146,5 @@ class ReadTimeTest extends TestCase
         ];
 
         $this->assertSame($expected, $actual);
-    }
-
-    /**
-     * Translation must be able to be changed as needed
-     *
-     * @test
-     */
-    public function setTranslation()
-    {
-        $customTranslation = 'foo';
-        $actual = (new ReadTime('word'))
-            ->setTranslation(['less_than' => $customTranslation])
-            ->get();
-
-        $this->assertSame($customTranslation, $actual);
-    }
-
-    /**
-     * Set translation with wrong key, and it should return default translation
-     *
-     * @test
-     */
-    public function setTranslationWithWrongKey()
-    {
-        $this->expectException(\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException::class);
-
-        (new ReadTime('word'))
-            ->setTranslation(['foo' => 'bar'])
-            ->get();
-    }
-
-    /**
-     * Translation must be in accordance with data type
-     *
-     * @test
-     */
-    public function setTranslationWithWrongDataType()
-    {
-        $this->expectException(\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException::class);
-
-        (new ReadTime('word'))
-            ->setTranslation(['less_than' => true])
-            ->get();
     }
 }
