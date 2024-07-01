@@ -18,8 +18,7 @@ class ReadTime
         private int $wpm = 265,
         private int $imageTime = 12,
         private int $cpm = 500
-    ) {
-    }
+    ) {}
 
     public function get(): string
     {

@@ -12,7 +12,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5 || ^11.0",
-        "realodix/relax": "^1.7"
+        "realodix/relax": "^1.12"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
