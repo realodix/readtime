@@ -4,17 +4,14 @@ use Realodix\Relax\Config;
 use Realodix\Relax\Finder;
 
 $localRules = [
-    // Realodix
-    'binary_operator_spaces' => [
-        'operators' => [
-            '=>' => 'align_single_space',
-            '='  => 'single_space', ],
-    ],
+    //
 ];
 
 $finder = Finder::base()
+    ->in(__DIR__)
     ->append(['.php-cs-fixer.dist.php']);
 
-return Config::create('Realodix')
+return Config::create('relax')
+    ->setFinder($finder)
     ->setRules($localRules)
-    ->setFinder($finder);
+    ->setCacheFile(__DIR__.'/.tmp/.php-cs-fixer.cache');
