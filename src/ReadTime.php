@@ -7,11 +7,11 @@ class ReadTime
     private array $translations = [];
 
     /**
-     * @param string|array $content   The content to analyze
-     * @param int          $wpm       Speed of reading the text in Words per Minute
-     * @param int          $imageTime Speed of reading the image in seconds
-     * @param int          $cpm       Speed of reading the Chinese / Korean / Japanese
-     *                                characters in Characters per Minute
+     * @param string|array $content The content to analyze
+     * @param int $wpm Speed of reading the text in Words per Minute
+     * @param int $imageTime Speed of reading the image in seconds
+     * @param int $cpm Speed of reading the Chinese / Korean / Japanese
+     *                 characters in Characters per Minute
      */
     public function __construct(
         private string|array $content,
@@ -107,7 +107,7 @@ class ReadTime
         $duration = match (true) {
             $readTime < 0.5 => $tr['less_than'],
             $readTime < 1.5 => $tr['one_min'],
-            default         => ceil($readTime).' '.$tr['more_than'],
+            default         => ceil($readTime) . ' ' . $tr['more_than'],
         };
 
         return $duration;

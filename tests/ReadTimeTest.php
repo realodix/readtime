@@ -12,15 +12,15 @@ class ReadTimeTest extends TestCase
 
         $this->assertSame(
             'less than a minute',
-            (new ReadTime(str_repeat('word', 3), $wpm))->get()
+            (new ReadTime(str_repeat('word', 3), $wpm))->get(),
         );
         $this->assertSame(
             '1 min read',
-            (new ReadTime(str_repeat('word ', $wpm), $wpm))->get()
+            (new ReadTime(str_repeat('word ', $wpm), $wpm))->get(),
         );
         $this->assertSame(
             '3 min read',
-            (new ReadTime(str_repeat('word ', $wpm * 3), $wpm))->get()
+            (new ReadTime(str_repeat('word ', $wpm * 3), $wpm))->get(),
         );
     }
 
@@ -32,7 +32,7 @@ class ReadTimeTest extends TestCase
 
         $this->assertSame(
             $wpm * 4,
-            (new ReadTime($array))->toArray()['total_words']
+            (new ReadTime($array))->toArray()['total_words'],
         );
     }
 
@@ -44,7 +44,7 @@ class ReadTimeTest extends TestCase
 
         $this->assertSame(
             $wpm * 4,
-            (new ReadTime($array))->toArray()['total_words']
+            (new ReadTime($array))->toArray()['total_words'],
         );
     }
 
@@ -55,19 +55,19 @@ class ReadTimeTest extends TestCase
         $article = str_repeat('word ', ($wpm / 2) - 1);
         $this->assertSame(
             'less than a minute',
-            (new ReadTime($article, $wpm))->toArray()['duration']
+            (new ReadTime($article, $wpm))->toArray()['duration'],
         );
 
         $article = str_repeat('word ', ($wpm / 2));
         $this->assertSame(
             '1 min read',
-            (new ReadTime($article, $wpm))->toArray()['duration']
+            (new ReadTime($article, $wpm))->toArray()['duration'],
         );
 
         $article = str_repeat('word ', ($wpm * 1.5));
         $this->assertSame(
             '2 min read',
-            (new ReadTime($article, $wpm))->toArray()['duration']
+            (new ReadTime($article, $wpm))->toArray()['duration'],
         );
     }
 
@@ -122,15 +122,15 @@ class ReadTimeTest extends TestCase
         $totalWords = $wpm * 2;
         $t_img = 2;
         $cjkCharacters = '陳港生'  // Jackie Chan
-                          .'るろうに剣心' // Rurouni Kenshin
-                          .'김제니'; // Jennie Kim
+                          . 'るろうに剣心' // Rurouni Kenshin
+                          . '김제니'; // Jennie Kim
         $actualDuration = ($totalWords / $wpm)
                             + (($imageTime + ($imageTime - 1)) / 60)
                             + (mb_strlen($cjkCharacters) / $cpm);
 
         $content = str_repeat('<img src="image.jpg">', $t_img)
-                   .str_repeat('word ', $totalWords)
-                   .$cjkCharacters;
+                   . str_repeat('word ', $totalWords)
+                   . $cjkCharacters;
 
         $actual = (new ReadTime($content, $wpm, $imageTime, $cpm))->toArray();
 

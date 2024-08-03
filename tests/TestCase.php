@@ -9,9 +9,9 @@ class TestCase extends BaseTestCase
     /**
      * Testing private/protected PHP methods using the Reflection API.
      *
-     * @param object $object     Instantiated object that we will run method on.
-     * @param string $method     Method name to call.
-     * @param array  $parameters Array of parameters to pass into method.
+     * @param object $object Instantiated object that we will run method on.
+     * @param string $method Method name to call.
+     * @param array $parameters Array of parameters to pass into method.
      * @return mixed Method return.
      *
      * @throws \Exception
