@@ -14,4 +14,4 @@ $finder = Finder::base()
 return Config::create('relax')
     ->setFinder($finder)
     ->setRules($localRules)
-    ->setCacheFile(__DIR__.'/.tmp/.php-cs-fixer.cache');
+    ->setCacheFile(__DIR__ . '/.tmp/.php-cs-fixer.cache');
