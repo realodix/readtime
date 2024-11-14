@@ -1,0 +1,9 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    tmpDir: .tmp/PHPStan
+    treatPhpDocTypesAsCertain: false
+    reportWrongPhpDocTypeInVarTag: true
+    ignoreErrors:
+        - identifier: missingType.iterableValue
