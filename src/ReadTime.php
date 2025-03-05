@@ -17,7 +17,7 @@ class ReadTime
         private string|array $content,
         private int $wpm = 265,
         private int $imageTime = 12,
-        private int $cpm = 500
+        private int $cpm = 500,
     ) {}
 
     public function get(): string
@@ -107,7 +107,7 @@ class ReadTime
         $duration = match (true) {
             $readTime < 0.5 => $tr['less_than'],
             $readTime < 1.5 => $tr['one_min'],
-            default         => ceil($readTime) . ' ' . $tr['more_than'],
+            default         => ceil($readTime).' '.$tr['more_than'],
         };
 
         return $duration;

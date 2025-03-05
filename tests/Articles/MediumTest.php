@@ -19,7 +19,7 @@ class MediumTest extends TestCase
         $wpm = 265;
 
         $content = str_repeat('<img src="image.jpg">', 140)
-        . 'Last month I spent the day at Medium’s San Francisco office. This was part of a personal project
+        .'Last month I spent the day at Medium’s San Francisco office. This was part of a personal project
         called 140 Portraits. The project is a behind the scene look at a person or business documented
         throughout one day in 140 images.
         April 29th | 8:30am I arrived @Medium 760 Market St, San Francisco. 9th floor of the historic Phelan
