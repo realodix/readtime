@@ -2,6 +2,8 @@
 
 namespace Realodix\ReadTime;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 class ReadTime
 {
     private array $translations = [];
@@ -118,8 +120,7 @@ class ReadTime
      */
     private function translation()
     {
-        $optResolver = new \Symfony\Component\OptionsResolver\OptionsResolver;
-
+        $optResolver = new OptionsResolver;
         $optResolver->define('less_than')->default('less than a minute')
             ->allowedTypes('string');
         $optResolver->define('one_min')->default('1 min read')
