@@ -5,5 +5,3 @@ parameters:
     tmpDir: .tmp/PHPStan
     treatPhpDocTypesAsCertain: false
     reportWrongPhpDocTypeInVarTag: true
-    ignoreErrors:
-        - identifier: missingType.iterableValue

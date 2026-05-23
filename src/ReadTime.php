@@ -6,10 +6,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReadTime
 {
+    /** @var array<string, string> */
     private array $translations = [];
 
     /**
-     * @param string|array $content The content to analyze
+     * @param string|array<string> $content The content to analyze
      * @param int $wpm Speed of reading the text in Words per Minute
      * @param int $imageTime Speed of reading the image in seconds
      * @param int $cpm Speed of reading the Chinese / Korean / Japanese
@@ -30,7 +31,7 @@ class ReadTime
     /**
      * Set the translation keys for the read time string
      *
-     * @param array $value An associative array of translation text
+     * @param array<string, string> $value An associative array of translation text
      */
     public function setTranslation(array $value): self
     {
@@ -42,9 +43,9 @@ class ReadTime
     /**
      * Get the contents and settings of the class as an array.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'duration'        => $this->duration(),
@@ -119,9 +120,9 @@ class ReadTime
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    private function translation()
+    private function translation(): array
     {
         $optResolver = new OptionsResolver;
         $optResolver->define('less_than')->default('less than a minute')
