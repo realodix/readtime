@@ -60,12 +60,10 @@ class ReadTime
 
     /**
      * Get the contents and settings of the class as a JSON string
-     *
-     * @return string
      */
-    public function toJson()
+    public function toJson(): string
     {
-        return collect($this->toArray())->toJson();
+        return json_encode($this->toArray(), JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -76,7 +74,12 @@ class ReadTime
         $content = $this->content;
 
         if (is_array($content)) {
-            $content = collect($content)->flatten();
+            $flattened = [];
+            array_walk_recursive($content, function ($value) use (&$flattened) {
+                $flattened[] = $value;
+            });
+
+            $content = implode('', $flattened);
         }
 
         return $content;
