@@ -110,13 +110,11 @@ class ReadTime
         $readTime = $this->actualDuration();
         $tr = $this->translation();
 
-        $duration = match (true) {
+        return match (true) {
             $readTime < 0.5 => $tr['less_than'],
             $readTime < 1.5 => $tr['one_min'],
             default         => ceil($readTime).' '.$tr['more_than'],
         };
-
-        return $duration;
     }
 
     /**
@@ -174,7 +172,7 @@ class ReadTime
     {
         $pattern = '/[\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}]/u';
 
-        return (int) preg_match_all($pattern, $this->cleanContent(), $matches);
+        return (int) preg_match_all($pattern, $this->cleanContent());
     }
 
     /**
@@ -205,6 +203,6 @@ class ReadTime
     {
         $pattern = '/<(img)([\W\w]+?)(src=")([\W\w]+?)[\/]?>/';
 
-        return (int) preg_match_all($pattern, $this->dirtyContent(), $matches);
+        return (int) preg_match_all($pattern, $this->dirtyContent());
     }
 }
